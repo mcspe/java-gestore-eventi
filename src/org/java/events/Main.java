@@ -79,6 +79,19 @@ public class Main {
 		System.out.println("\n------------------------------\n");
 
 		sc.close();
+		
+		
+		/***** Prova classe Concerto ******/
+//		Concerto c = null;
+//		
+//		try {
+//			c = new Concerto("conc", "1/10/23", 45, "15.15", "45.00");
+//		} catch (Exception e) {
+//			System.out.println(e.getMessage());
+//		}
+//		
+//		System.out.println(c);
+		
 		System.out.println("******************************");
 		System.out.println("The End!");
 		System.out.println("******************************\n");

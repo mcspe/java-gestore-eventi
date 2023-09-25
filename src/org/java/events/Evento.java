@@ -9,7 +9,7 @@ public class Evento {
 	private LocalDate data;
 	private int nPostiTot;
 	private int nPostiPrenotati;
-	private final DateTimeFormatter formatters = DateTimeFormatter.ofPattern("d/M/uu");
+	private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d/M/uu");
 	
 	public Evento(String titolo, String data, int nPostiTot) throws Exception {
 		setTitolo(titolo);
@@ -45,7 +45,7 @@ public class Evento {
 	}
 
 	public String getDataFormattata() {
-		return data.format(formatters);
+		return data.format(FORMATTER);
 	}
 	
 	public LocalDate getData() {
@@ -53,7 +53,7 @@ public class Evento {
 	}
 
 	public void setData(String data) throws Exception {
-		LocalDate dataFormattata = LocalDate.parse(data, formatters);
+		LocalDate dataFormattata = LocalDate.parse(data, FORMATTER);
 		if (dataFormattata.isBefore(LocalDate.now())) throw new Exception("La data inserita risulta invalida, inserisci una data successiva a " + LocalDate.now());
 		else this.data = dataFormattata;
 	}
