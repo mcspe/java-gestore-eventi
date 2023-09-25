@@ -9,9 +9,9 @@ public class Evento {
 	private LocalDate data;
 	private int nPostiTot;
 	private int nPostiPrenotati;
-	private final DateTimeFormatter formatters = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+	private final DateTimeFormatter formatters = DateTimeFormatter.ofPattern("d/M/uu");
 	
-	public Evento(String titolo, LocalDate data, int nPostiTot) throws Exception {
+	public Evento(String titolo, String data, int nPostiTot) throws Exception {
 		setTitolo(titolo);
 		setData(data);
 		setnPostiTot(nPostiTot);
@@ -29,10 +29,10 @@ public class Evento {
 
 	public void disdici() throws Exception {
 		if ((LocalDate.now().isAfter(getData())) || (getnPostiPrenotati() == 0)) {
+			throw new Exception("Non è più possibie disdire questo Evento.");
+		} else {
 			int prenotati = getnPostiPrenotati();
 			setnPostiPrenotati(--prenotati);
-		} else {
-			throw new Exception("Non è più possibie disdire questo Evento.");
 		}
 	}
 	
@@ -52,9 +52,10 @@ public class Evento {
 		return data;
 	}
 
-	public void setData(LocalDate data) throws Exception {
-		if (data.isBefore(LocalDate.now())) throw new Exception("La data inserita risulta invalida, inserisci una data successiva a " + LocalDate.now());
-		else this.data = data;
+	public void setData(String data) throws Exception {
+		LocalDate dataFormattata = LocalDate.parse(data, formatters);
+		if (dataFormattata.isBefore(LocalDate.now())) throw new Exception("La data inserita risulta invalida, inserisci una data successiva a " + LocalDate.now());
+		else this.data = dataFormattata;
 	}
 
 	public int getnPostiTot() {
@@ -74,6 +75,10 @@ public class Evento {
 		this.nPostiPrenotati = nPostiPrenotati;
 	}
 
+	public int getPostiDisponibili() {
+		return getnPostiTot() - getnPostiPrenotati();
+	}
+	
 	@Override
 	public String toString() {
 		return getDataFormattata() + " - " + getTitolo();
