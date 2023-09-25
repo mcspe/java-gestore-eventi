@@ -92,8 +92,38 @@ public class Main {
 //		
 //		System.out.println(c);
 		
+		/***** Prova Milestone 4 ******/
+		
+//		ProgrammEventi progE = new ProgrammEventi("prova");
+//		Evento e = null;
+//		Concerto c = null;
+//		
+//		try {
+//			e = new Evento("conc", "1/10/23", 45);
+//			c = new Concerto("con1", "2/10/23", 56, "15.23", "64");
+//		} catch (Exception er) {
+//			er.getMessage();
+//		}
+//		
+//		progE.addEvento(e);
+//		progE.addEvento(c);
+//		
+//		System.out.println(progE.getEventiInData("2/10/23"));
+//		
+//		System.out.println(progE.getTotEventi());
+//		
+//		System.out.println(progE);
+//		
+//		progE.resetEventi();
+//		
+//		System.out.println(progE);
+		
+
+		
 		System.out.println("******************************");
 		System.out.println("The End!");
+		
+		
 		System.out.println("******************************\n");
 
 	}
