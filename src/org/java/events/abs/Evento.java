@@ -1,9 +1,10 @@
-package org.java.events;
+package org.java.events.abs;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Evento {
+public abstract class Evento {
 	
 	private String titolo;
 	private LocalDate data;
@@ -17,6 +18,10 @@ public class Evento {
 		setnPostiTot(nPostiTot);
 		setnPostiPrenotati(0);
 	}
+	
+	public abstract String getPrezzoFormattato();
+	
+	public abstract BigDecimal getPrezzo();
 	
 	public void prenota() throws Exception {
 		if ((LocalDate.now().isBefore(getData())) && getnPostiPrenotati() < getnPostiTot()) {

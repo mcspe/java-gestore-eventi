@@ -1,14 +1,18 @@
 package org.java.events;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.java.events.abs.Evento;
+
 public class ProgrammEventi {
 	
 	private String titolo;
 	private List<Evento> eventi;
+	private BigDecimal avg;
 	
 	public ProgrammEventi(String titolo) {
 		setTitolo(titolo);
@@ -28,10 +32,36 @@ public class ProgrammEventi {
 							EVENTIINDATA.append(e.toString());
 							EVENTIINDATA.append("\n");
 						});
+		if (eventi.stream().filter(e -> e.getData().equals(dataFormattata)).count() == 0) EVENTIINDATA.append("Nessun evento in programma per la data indicata");
 		return EVENTIINDATA.toString();
 	}
 	
-	public int getTotEventi() {
+	public String mediaPrezzoConcerto() {
+		List<Evento> concerti = eventi.stream().filter(e -> (e instanceof Concerto)).toList();
+		return mediaPrezzo(concerti);
+	}
+	
+	public String mediaPrezzoSpettacolo() {
+		List<Evento> spettacoli = eventi.stream().filter(e -> (e instanceof Spettacolo)).toList();
+		return mediaPrezzo(spettacoli);
+	}
+	
+	public String mediaPrezzoEvento() {
+		return mediaPrezzo(eventi);
+	}
+	
+	public String mediaPrezzo(List<Evento> eventi) {
+		setAvg(new BigDecimal(0));
+		eventi.stream().forEach(e -> {
+			setAvg(avg.add(e.getPrezzo()));
+			System.out.println(avg);
+		});
+		setAvg(avg.divide(BigDecimal.valueOf(eventi.size())).setScale(2));
+		System.out.println(avg);
+		return "" + getAvg().setScale(2) + "€";
+	}
+	
+ 	public int getTotEventi() {
 		return eventi.size();
 	}
 	
@@ -49,6 +79,14 @@ public class ProgrammEventi {
 	
 	private void setEventi() {
 		eventi = new ArrayList<>();
+	}
+	
+	private BigDecimal getAvg() {
+		return avg;
+	}
+	
+	private void setAvg(BigDecimal avg) {
+		this.avg = avg;
 	}
 
 	@Override
